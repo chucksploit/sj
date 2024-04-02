@@ -17,6 +17,7 @@ var automateCmd = &cobra.Command{
 This enables the user to get a quick look at which endpoints require authentication and which ones do not. If a request
 responds in an abnormal way, manual testing should be conducted (prepare manual tests using the "prepare" command).`,
 	Run: func(cmd *cobra.Command, args []string) {
+		initExcel()
 
 		var bodyBytes []byte
 
@@ -35,6 +36,7 @@ responds in an abnormal way, manual testing should be conducted (prepare manual 
 			bodyBytes, _ = io.ReadAll(specFile)
 		}
 		GenerateRequests(bodyBytes, client, "automate")
+		saveExcel("report.xlsx")
 	},
 }
 

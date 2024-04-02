@@ -28,6 +28,8 @@ func logAccessible(status int, target, method string) {
 		"Target": target,
 		"Method": method,
 	}).Print("Endpoint accessible!")
+	message := "Endpoint accessible!"
+	writeToExcel(status, target, method, message)
 }
 
 func logManual(status int, target, method, errorMsg string) {
@@ -39,6 +41,8 @@ func logManual(status int, target, method, errorMsg string) {
 		"Target": target,
 		"Method": method,
 	}).Warn(errorMsg)
+	message := "Manual testing may be required."
+	writeToExcel(status, target, method, message)
 }
 
 func logNotFound(status int, target, method, errorMsg string) {
@@ -50,6 +54,8 @@ func logNotFound(status int, target, method, errorMsg string) {
 		"Target": target,
 		"Method": method,
 	}).Error(errorMsg)
+	message := "Endpoint not found."
+	writeToExcel(status, target, method, message)
 }
 
 func logRedirect(status int, target, method string) {
@@ -58,6 +64,8 @@ func logRedirect(status int, target, method string) {
 		"Target": target,
 		"Method": method,
 	}).Error("Redirect detected. This likely requires authentication.")
+	message := "Redirect detected. This likely requires authentication."
+	writeToExcel(status, target, method, message)
 }
 
 func logSkipped(status int, target, method string) {
@@ -66,6 +74,8 @@ func logSkipped(status int, target, method string) {
 		"Target": target,
 		"Method": method,
 	}).Warn("Request skipped (dangerous keyword found).")
+	message := "Request skipped (dangerous keyword found)."
+	writeToExcel(status, target, method, message)
 }
 
 func logUnauth(status int, target, method, errorMsg string) {
@@ -77,4 +87,6 @@ func logUnauth(status int, target, method, errorMsg string) {
 		"Target": target,
 		"Method": method,
 	}).Error(errorMsg)
+	message := "Unauthorized."
+	writeToExcel(status, target, method, message)
 }
